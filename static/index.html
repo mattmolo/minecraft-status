@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <title>Molonium Server Status</title>
+        <link rel="SHORTCUT ICON" href="favicon.ico">
+
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/g/bootstrap.material-design@0.5.7(css/bootstrap-material-design.min.css+css/ripples.min.css)">
+
+        <script language="javascript">
+
+          function getdata(timeout) {
+            console.log('loading');
+            var j = $.getJSON('/players', function(data) {
+
+            if (data.error) {
+              failure();
+            } else {
+              $('.player-number').html(data.online + '/' + data.max);
+
+              $('.server-status').html('<i class="fa fa-check-circle"></i> Server is online');
+
+              $('.version-tag').html(data.version);
+
+              players(data.playerlist, data.online);
+            }
+          });
+
+          j.fail(function(){
+            failure();
+          });
+
+
+          if (!timeout) {
+            setTimeout(getdata, 60*1000);
+          }
+        }
+
+        function failure() {
+          $('.player-number').html('N/A');
+
+          $('.version-tag').html('N/A');
+
+          $('.server-status').html('<i class="fa fa-times-circle"></i> Server is offline');
+
+          $('.online-players').html('<div class="alert alert-danger" style="font-size:16px;"> Server isn\'t online at the moment! <i class="fa fa-frown-o"></i></div>');
+
+        }
+
+        function players(players, count) {
+
+          var pd = $('.online-players');
+
+          if (count > 0) {
+
+            //sort players alphabetically and case insensitive
+            players.sort(function (a, b) {
+              return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+            });
+
+            //clear the loading message and other things
+            pd.html('');
+
+            var url = "http://cravatar.eu/helmavatar/";
+
+            players.forEach(function(player) {
+              var url = "https://minotar.net/helm/" + player.name + "/50.png";
+              pd.append('<a data-placement="top" rel="tooltip" style="display: inline-block;" title="'+player.name+'"><img src="'+url'" size="40" width="40" height="40" style="width: 40px; height: 40px; margin-bottom: 5px; margin-right: 5px; border-radius: 3px; "/></a>');
+            });
+
+            $("[rel='tooltip']").tooltip();
+
+          } else {
+            pd.html('<div class="alert alert-warning" style="font-size:16px;"> No players online! <i class="fa fa-frown-o"></i></div>');
+          }
+        }
+
+        jQuery(document).ready(function(){
+            getdata(false);
+        });
+
+        </script>
+
+        <style>
+        /*Custom CSS Overrides*/
+        body {
+            /* font-family: 'Lato', sans-serif !important; */
+            background-color: #303030;
+        }
+
+        p, ol {
+            font-size: 18px;
+        }
+
+        ul {
+            font-size: 15px;
+            list-style-position: inside;
+                 columns: 2;
+         -webkit-columns: 2;
+            -moz-columns: 2;
+        }
+
+        @media (max-width: 991px) {
+           ul {
+               font-size: 15px;
+               list-style-position: inside;
+                    columns: 1;
+            -webkit-columns: 1;
+               -moz-columns: 1;
+           }
+        }
+
+        img {
+            width: 85%;
+            margin: 10px;
+        }
+
+        .code-text {
+            background-color: #ddd;
+            width: 85%;
+            margin: 10px;
+            overflow-y: hidden;
+            padding: 3px;
+            font-size: 16px;
+            word-break: keep-all;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .collapsed {
+           overflow: hidden;
+           height: 0px;
+        }
+
+        .cursor-hover {
+            cursor: pointer;
+        }
+
+        .navbar-default {
+            background-color: #212121 !important;
+        }
+
+        .jumbotron {
+            background-color: #424242 !important;
+            color: white !important;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        </style>
+    </head>
+    <body>
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Molonium Server Status</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 jumbotron" style="height: 230px">
+                <h3 onclick="getdata(true);">General Information:</h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><b>IP</b></td>
+                            <td>mc.molee.me</td>
+                        </tr>
+                        <tr>
+                            <td><b>Version</b></td>
+                            <td class="version-tag">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td><b>Players</b></td>
+                            <td class="player-number">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td><b>Status</b></td>
+                            <td class="server-status">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6 col-md-offset-1 jumbotron" style="height: 230px; font-size:0px;">
+                <h3>Players:</h3>
+                <div class="online-players">
+                  <div class="alert alert-warning" style="font-size:16px;">Loading...</div>
+                </div> <!-- .online players !-->
+            </div>
+        </div>
+
+        <!--
+        <div class="row hide">
+            <div class="col-md-12 jumbotron">
+                <h2>Mod List:</h2>
+                <div class="row">
+                    <ul>
+                        <li>Applied Energistics 2</li>
+                        <li>Animals+</li>
+                        <li>Archimedes Ships</li>
+                        <li>Baubles</li>
+                        <li>BiblioCraft</li>
+                        <li>BigReactors</li>
+                        <li>BiomesOPlenty</li>
+                        <li>Botania</li>
+                        <li>CarpentersBlocks</li>
+                        <li>chisel</li>
+                        <li>ComputerCraft</li>
+                        <li>Decocraft</li>
+                        <li>EnderIO</li>
+                        <li>EnderStorage</li>
+                        <li>EquivalentExchange 3</li>
+                        <li>ExtraUtilities</li>
+                        <li>FastCraft</li>
+                        <li>Flan's Mod</li>
+                        <li>ForgeMicroblock</li>
+                        <li>Fossil's and Archeology Revival</li>
+                        <li>Garden Stuff</li>
+                        <li>Growth Craft</li>
+                        <li>Inventory Tweaks</li>
+                        <li>Iron Chest</li>
+                        <li>JourneyMap</li>
+                        <li>LittleMaid Mob</li>
+                        <li>MagicYarn</li>
+                        <li>Mekanism</li>
+                        <li>MineFactoryReloaded</li>
+                        <li>Morph</li>
+                        <li>Morpheus</li>
+                        <li>NotEnoughItems</li>
+                        <li>OpenBlocks</li>
+                        <li>OpenMods</li>
+                        <li>OpenPeripheral</li>
+                        <li>Optifine</li>
+                        <li>Pams Harverstcraft</li>
+                        <li>Peripherals++</li>
+                        <li>Railcraft</li>
+                        <li>Special Mobs</li>
+                        <li>SimplyJetpacks</li>
+                        <li>TConstruct</li>
+                        <li>Thaumcraft</li>
+                        <li>Thaumic Exploration</li>
+                        <li>Thaumic Tinkerer</li>
+                        <li>Thermal Dynamics</li>
+                        <li>Thermal Expansion</li>
+                        <li>TMechworks</li>
+                        <li>TwilightForest</li>
+                        <li>Waila</li>
+                        <li>Wintercraft</li>
+                        <li>Witchery</li>
+                        <li>Xeno's Reliquary</li>
+                        <li>Ztones</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        !-->
+        <div class="row">
+            <div class="col-md-12 jumbotron">
+                <h2 style="margin-bottom: 20px" class="cursor-hover" id="setup" onclick="jQuery('.collapsable').slideToggle('slow')">Setup Instructions: &#x25BE</h2>
+                <div class="collapsable" style="display: none">
+                <ol>
+                  <li>Download the ModPack launcher</li>
+                    <ul>
+                      <li><a href="MoloniumLauncher.exe">Windows (.exe)</a></li>
+                      <li><a href="MoloniumLauncher.jar">OS X/Linux (.jar)</a></li>
+                    </ul>
+                 <li>
+                   Windows will probably complain about it being unsafe, and you might have to click some things to let it through. I promise it's safe! I essentially made it.<br>
+                 </li>
+                 <li>
+                   The Molonium winter pack should already be installed and available for you to play. Just log in, wait for it to download, and off you go! Don't forget the server ip is molee.me<br>
+                 </li>
+                 <li>
+                   Note: I'd recommend going through options and setting your memory limit higher if you have enough RAM. 4096 (4 GB) should be good.<br>
+                 </li>
+                </ol>
+
+                <p>All should be good then! If I update it, it will ask for you to update so please do that to play.
+                Elsewise, once you do the first couple steps, next time just open up the launcher and click play!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </body>
+</html>
+
