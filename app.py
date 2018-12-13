@@ -3,8 +3,10 @@ from flask import Flask, jsonify
 
 from mcstatus import MinecraftServer
 
+MC_SERVER = os.environ.get("MC_STATUS_SERVER", "127.0.0.1")
+
 app = Flask(__name__, static_url_path="")
-server = MinecraftServer.lookup('10.10.10.10')
+server = MinecraftServer.lookup(MC_SERVER)
 
 last_ping = 0
 players_cache = []
@@ -32,4 +34,4 @@ def players():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True, host="0.0.0.0", port=4002)
+    app.run(debug=True, use_reloader=True, host="0.0.0.0", port=4000)
