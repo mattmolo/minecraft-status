@@ -1,4 +1,6 @@
+import os
 import time
+
 from flask import Flask, jsonify
 
 from mcstatus import MinecraftServer

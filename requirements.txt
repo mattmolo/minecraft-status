@@ -1,2 +1,3 @@
 Flask==0.12.3
+gunicorn==19.9.0
 mcstatus==2.1
