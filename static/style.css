@@ -1,0 +1,76 @@
+body {
+    font-family: 'Lato', sans-serif !important; 
+    background-color: rgb(245, 246, 250);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+}
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #fdfdfd;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0px;
+}
+
+.navbar-title {
+    width: 100%;
+    height: 100%;
+    color: #222222;
+    padding: 10px;
+    font-size: 25px;
+}
+
+.container {
+    width: 100%;
+}
+
+.panel {
+    float: left;
+    width: 50%;
+    padding : 15px;
+    box-sizing: border-box;
+}
+
+.panel-content {
+    background-color: #fdfdfd;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0px;
+    border-radius: 5px;
+}
+
+.panel-content > h1 {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.info-table td:first-child {
+    padding: 0px 10px;
+    text-align: right;
+}
+
+.head {
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+.player-heads {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 60px);
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 750px) {
+    .panel {
+        width: 100%;
+    }
+}
