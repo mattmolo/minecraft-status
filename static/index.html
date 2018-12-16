@@ -72,7 +72,7 @@
 
             players.forEach(function(player) {
               var url = "https://minotar.net/helm/" + player.name + "/50.png";
-              pd.append('<a data-placement="top" rel="tooltip" style="display: inline-block;" title="'+player.name+'"><img src="'+url'" size="40" width="40" height="40" style="width: 40px; height: 40px; margin-bottom: 5px; margin-right: 5px; border-radius: 3px; "/></a>');
+              pd.append('<a data-placement="top" rel="tooltip" style="display: inline-block;" title="'+player.name+'"><img src="'+url+'" size="40" width="40" height="40" style="width: 40px; height: 40px; margin-bottom: 5px; margin-right: 5px; border-radius: 3px; "/></a>');
             });
 
             $("[rel='tooltip']").tooltip();
