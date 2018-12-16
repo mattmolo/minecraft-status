@@ -65,8 +65,8 @@
                     <div class="panel-content">
                         <h1>Players</h1>
                         <div class="online-players">
-                            <div class="player-heads" v-if="data.query.players">
-                                <div v-for="player of data.query.players">
+                            <div class="player-heads" v-if="data.players && data.players.length > 0">
+                                <div v-for="player of data.players">
                                     <img class="head" v-bind:src="player | head" v-bind:alt="player">
                                 </div>
                             </div>

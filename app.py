@@ -30,7 +30,8 @@ def players():
     status = server.status()
     cache = {
         "query": query.raw,
-        "status": status.raw
+        "status": status.raw,
+        "players": query.players.names
     }
 
     last_ping = time.time()
