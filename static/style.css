@@ -24,6 +24,18 @@ body {
     font-size: 25px;
 }
 
+.navbar-right {
+    height: 50%;
+    float: right;
+    color: #222222;
+    font-size: 22px;
+    padding: 0 10px;
+}
+
+.color-toggle:hover {
+    cursor: pointer;
+}
+
 .container {
     width: 100%;
 }
@@ -51,6 +63,16 @@ body {
     color: rgba(0, 0, 0, 0.6);
     text-transform: uppercase;
     font-size: 20px;
+}
+
+.offline {
+    margin: 0 auto;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
 }
 
 .info-table td:first-child {

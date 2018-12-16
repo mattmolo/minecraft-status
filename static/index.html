@@ -10,8 +10,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 
     <!-- CSS –––––––––––––––––––––––––––––––––––––––––– -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous" rel="stylesheet">
 
     <link href="style.css" rel="stylesheet">
 
@@ -27,8 +30,16 @@
 
     <body>
         <div id="app">
+            <link v-if="nightMode" href="nightMode.css" rel="stylesheet">
+
             <div class="navbar">
-                <span class="navbar-title" >Molonium Minecraft Server Status</a>
+                <span class="navbar-title">Molonium Minecraft Server Status</span>
+                <div class="navbar-right">
+                    <i class="fas color-toggle"
+                       :class="{'fa-sun': nightMode, 'fa-moon': !nightMode}"
+                       @click="toggleColor">
+                    </i>
+                </div>
             </div>
 
             <div class="container" v-if="data">
@@ -67,7 +78,7 @@
                         <div class="online-players">
                             <div class="player-heads" v-if="data.players && data.players.length > 0">
                                 <div v-for="player of data.players">
-                                    <img class="head" v-bind:src="player | head" v-bind:alt="player">
+                                    <img class="head" :src="player | head" :alt="player">
                                 </div>
                             </div>
                             <div v-else>
@@ -77,6 +88,11 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="container" v-if="!data">
+                <div class="offline">
+                    No connection to server
+                </div>
             </div>
         </div>
 

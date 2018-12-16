@@ -1,0 +1,32 @@
+body {
+    background-color: #061f2f;
+}
+
+.navbar {
+    background-color: #0f1c2a;
+    border-bottom: rgba(255, 255, 255, 0.3) 1px solid;
+    box-shadow: none;
+}
+
+.navbar-title {
+    color: #fefefe;
+}
+
+.navbar-right {
+    color: #fefefe;
+}
+
+.panel-content {
+    background-color: #101c29;
+    border: rgba(255, 255, 255, 0.3) 1px solid;
+    color: white;
+    box-shadow: none;
+}
+
+.panel-content > h1 {
+    color: #9CD7F7;
+}
+
+.offline {
+    color: #9CD7F7;
+}
