@@ -3,7 +3,7 @@
 <head>
     <!-- Basic Page Needs ––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Molonium Minecraft Server Status</title>
+    <title>Molonium Server Status</title>
 
     <!-- Set Mobile Scaling to Device Width
     ––––––––––––––––––––––––––––––––––––––––––––––––––- -->
@@ -33,7 +33,7 @@
             <link v-if="nightMode" href="nightMode.css" rel="stylesheet">
 
             <div class="navbar">
-                <span class="navbar-title">Molonium Minecraft Server Status</span>
+                <span class="navbar-title">Molonium Server Status</span>
                 <div class="navbar-right">
                     <i class="fas color-toggle"
                        :class="{'fa-sun': nightMode, 'fa-moon': !nightMode}"
@@ -78,7 +78,7 @@
                         <div class="online-players">
                             <div class="player-heads" v-if="data.players && data.players.length > 0">
                                 <div v-for="player of data.players">
-                                    <img class="head" :src="player | head" :alt="player">
+                                    <img class="head" :src="player | head" :title="player">
                                 </div>
                             </div>
                             <div v-else>
