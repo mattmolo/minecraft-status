@@ -14,6 +14,7 @@ body {
     background-color: #fdfdfd;
     margin-bottom: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0px;
+    border-bottom: #fdfdfd 1px solid;
 }
 
 .navbar-title {
@@ -53,6 +54,7 @@ body {
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0px;
     border-radius: 5px;
+    border: #fdfdfd 1px solid;
 }
 
 .panel-content > h1 {
@@ -85,10 +87,10 @@ body {
     box-sizing: border-box;
 }
 
-.player-heads {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 60px);
-    justify-content: space-between;
+.player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 @media screen and (max-width: 750px) {
