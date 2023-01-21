@@ -5,7 +5,7 @@ let V = new Vue({
     data: {
         // API data
         data: undefined,
-        ip: "mc.mmolo.co",
+        ip: "modded.molo.gg",
         nightMode: false
     },
     methods: {
