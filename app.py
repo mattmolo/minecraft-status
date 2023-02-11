@@ -53,7 +53,7 @@ def players():
     data = get_query()
     numplayers = data["query"]["numplayers"]
 
-    return jsonify({"numplayers": numplayers}, status=404 if numplayers == 0 else 200
+    return jsonify({"numplayers": numplayers}, status=404 if numplayers == 0 else 200)
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, host="0.0.0.0", port=5000)
