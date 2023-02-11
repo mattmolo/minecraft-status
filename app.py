@@ -27,7 +27,7 @@ def players():
         return jsonify(cache)
 
     query = server.query()
-    status = server.status()
+    status = server.status().raw
     # Trim extra data
     for key in ["forgeData", "favicon"]:
         if key in status:
@@ -35,7 +35,7 @@ def players():
 
     cache = {
         "query": query.raw,
-        "status": status.raw,
+        "status": status,
         "players": query.players.names
     }
 
