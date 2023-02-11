@@ -14,20 +14,16 @@ server = MinecraftServer.lookup(MC_SERVER)
 last_ping = 0
 cache = {}
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
-@app.route('/query')
-def players():
+def get_query():
     global last_ping
     global cache
 
     if time.time() - last_ping < 5:
-        return jsonify(cache)
+        return cache
 
     query = server.query()
     status = server.status().raw
+
     # Trim extra data
     for key in ["forgeData", "favicon"]:
         if key in status:
@@ -41,7 +37,23 @@ def players():
 
     last_ping = time.time()
 
-    return jsonify(cache)
+    return cache
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
+@app.route('/query')
+def query():
+    data = get_query()
+    return jsonify(data)
+
+@app.route('/players')
+def players():
+    data = get_query()
+    numplayers = data["query"]["numplayers"]
+
+    return jsonify({"numplayers": numplayers}), 404 if numplayers == 0 else 200
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, host="0.0.0.0", port=5000)
