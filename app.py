@@ -28,6 +28,11 @@ def players():
 
     query = server.query()
     status = server.status()
+    # Trim extra data
+    for key in ["forgeData", "favicon"]:
+        if key in status:
+            del status[key]
+
     cache = {
         "query": query.raw,
         "status": status.raw,
