@@ -51,9 +51,8 @@ def query():
 @app.route('/players')
 def players():
     data = get_query()
-    numplayers = data["query"]["numplayers"]
+    numplayers = int(data["query"]["numplayers"])
     status = 404 if numplayers == 0 else 200
-    print(status)
 
     return jsonify({"numplayers": numplayers}), status
 
