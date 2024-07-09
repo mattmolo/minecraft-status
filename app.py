@@ -52,7 +52,7 @@ def query():
 def players():
     data = get_query()
     numplayers = int(data["query"]["numplayers"])
-    status = 404 if numplayers == 0 else 200
+    status = 200 if numplayers == 0 else 200
 
     return jsonify({"numplayers": numplayers}), status
 
