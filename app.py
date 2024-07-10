@@ -3,14 +3,14 @@ import time
 
 from flask import Flask, jsonify
 
-from mcstatus import MinecraftServer
+from mcstatus import JavaServer
 
 MC_SERVER = os.environ.get("MC_STATUS_SERVER", "127.0.0.1")
 
 app = Flask(__name__, static_url_path="")
 
 
-server = MinecraftServer.lookup(MC_SERVER)
+server = JavaServer.lookup(MC_SERVER)
 last_ping = 0
 cache = {}
 
