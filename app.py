@@ -14,6 +14,7 @@ server = JavaServer.lookup(MC_SERVER)
 last_ping = 0
 cache = {}
 
+
 def get_query():
     global last_ping
     global cache
@@ -32,29 +33,34 @@ def get_query():
     cache = {
         "query": query.raw,
         "status": status,
-        "players": query.players.names
+        "players": query.players.names,
     }
 
     last_ping = time.time()
 
     return cache
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
 
-@app.route('/query')
+@app.route("/")
+def index():
+    return app.send_static_file("index.html")
+
+
+@app.route("/query")
 def query():
     data = get_query()
     return jsonify(data)
 
-@app.route('/players')
+
+@app.route("/players")
 def players():
     data = get_query()
-    numplayers = int(data["query"]["numplayers"])
-    status = 200 if numplayers == 0 else 200
 
-    return jsonify({"numplayers": numplayers}), status
+    num_players = int(data["query"]["numplayers"])
+    status = 404 if num_players == 0 else 200
 
-if __name__ == '__main__':
+    return jsonify({"numplayers": num_players}), status
+
+
+if __name__ == "__main__":
     app.run(debug=True, use_reloader=True, host="0.0.0.0", port=5000)
