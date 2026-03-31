@@ -6,7 +6,6 @@ let V = new Vue({
         // API data
         data: undefined,
         ip: "modded.molo.gg",
-        nightMode: false
     },
     methods: {
         getData: async function() {
@@ -18,10 +17,6 @@ let V = new Vue({
             // Recall the function to update data again
             setTimeout(this.getData, UPDATE_INTERVAL)
         },
-        toggleColor: function() {
-            this.nightMode = !this.nightMode
-            localStorage.setItem('nightMode', this.nightMode)
-        }
     },
     filters: {
         head: function(player) {
